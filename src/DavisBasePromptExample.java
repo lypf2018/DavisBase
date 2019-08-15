@@ -48,7 +48,7 @@ public class DavisBasePromptExample {
 		splashScreen();
 
 		/* This method will initialize the database storage if it doesn't exit */
-		DavisBaseBinaryFileExample.initializeDataStore();
+//		DavisBaseBinaryFileExample.initializeDataStore();
 
 		/* Variable to collect user input from the prompt */
 		String userCommand = ""; 
@@ -184,6 +184,7 @@ public class DavisBasePromptExample {
 				break;
 			case "quit":
 				isExit = true;
+				break;
 			default:
 				System.out.println("I didn't understand the command: \"" + userCommand + "\"");
 				break;
@@ -242,9 +243,18 @@ public class DavisBasePromptExample {
 			 */
 			tableFile = new RandomAccessFile("data/user_data/" + tableFileName, "rw");
 			tableFile.setLength(pageSize);
+			// Initial table page header
 			tableFile.seek(0);
-			tableFile.writeInt(63);
-			tableFile.writeInt(64);
+			// offset : 0
+			tableFile.write(0x0D);
+			// offset : 1
+			tableFile.writeShort(0);
+			// offset : 3
+			tableFile.writeShort((short)pageSize);
+			// offset : 5
+			tableFile.writeInt(0xFFFFFFFF);
+			// offset : 9
+			tableFile.close();
 		}
 		catch(Exception e) {
 			System.out.println(e);

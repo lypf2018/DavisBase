@@ -17,7 +17,7 @@ public class Test {
 	public static void main(String[] args) {
 		RandomAccessFile binaryFile;
 		try {
-			binaryFile = new RandomAccessFile("data/user_data/123.tbl", "rw");
+			binaryFile = new RandomAccessFile("data/user_data/b.tbl", "rw");
 			HexDump.displayBinaryHex(binaryFile, 512);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

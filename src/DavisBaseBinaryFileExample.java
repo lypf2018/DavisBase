@@ -148,7 +148,15 @@ public class DavisBaseBinaryFileExample {
 			davisbaseTablesCatalog.write(0x0D);
 			/* Write 0x00 (although its value is already 0x00) to indicate there 
 			 * are no cells on this page */
-			davisbaseTablesCatalog.write(0x00);
+//			davisbaseTablesCatalog.write(0x00);
+			davisbaseTablesCatalog.writeShort(0);
+			davisbaseTablesCatalog.writeShort((short)pageSize);
+			davisbaseTablesCatalog.writeInt(0xFFFFFFFF);
+
+			// Write davisbase_tables table meta-data into davisbase_tables
+			davisbaseTablesCatalog.seek(5);
+//			davisbaseTablesCatalog.writeInt(0xFFFFFFFF);
+			
 			davisbaseTablesCatalog.close();
 		}
 		catch (Exception e) {
@@ -167,7 +175,11 @@ public class DavisBaseBinaryFileExample {
 			davisbaseColumnsCatalog.write(0x0D);
 			/* Write 0x00 (although its value is already 0x00) to indicate there 
 			 * are no cells on this page */
-			davisbaseColumnsCatalog.write(0x00); 
+//			davisbaseColumnsCatalog.write(0x00); 
+			davisbaseColumnsCatalog.writeShort(0);
+			davisbaseColumnsCatalog.writeShort((short)pageSize);
+			davisbaseColumnsCatalog.writeInt(0xFFFFFFFF);
+			
 			davisbaseColumnsCatalog.close();
 		}
 		catch (Exception e) {
